@@ -1,0 +1,25 @@
+---
+// copo de café to-go com luva rosa e estrelinha
+interface Props { class?: string; [key: string]: any }
+const { class: cls = "", ...rest } = Astro.props;
+const lid = "M28 18Q30 8 40 8L80 8Q90 8 92 18L94 26L26 26Z";
+const rim = "M18 26L102 26Q106 26 106 31L106 36Q106 41 101 41L19 41Q14 41 14 36L14 31Q14 26 18 26Z";
+const body = "M22 41L98 41L87 148Q86 156 78 156L42 156Q34 156 33 148Z";
+const sleeve = "M27 80L93 80L89 122L31 122Z";
+const spark = "M50 6C53 35 65 47 94 50C65 53 53 65 50 94C47 65 35 53 6 50C35 47 47 35 50 6Z";
+---
+<svg class:list={["sticker", "sticker--coffee", cls]} viewBox="0 -2 120 168" aria-hidden="true" focusable="false" {...rest}>
+  <g fill="#fff" stroke="#fff" stroke-width="16" stroke-linejoin="round">
+    <path d={lid} /><path d={rim} /><path d={body} />
+  </g>
+  <g stroke="#000" stroke-width="3" stroke-linejoin="round">
+    <path d={body} fill="#FFFFFF" />
+    <path d={sleeve} fill="#FFA9D7" />
+    <path d={lid} fill="#FF80B4" />
+    <path d={rim} fill="#F33283" />
+  </g>
+  <path d="M50 16L70 16" stroke="#000" stroke-width="3" stroke-linecap="round" />
+  <g transform="translate(46 87) scale(.28)">
+    <path d={spark} fill="#F33283" stroke="#000" stroke-width="9" stroke-linejoin="round" />
+  </g>
+</svg>

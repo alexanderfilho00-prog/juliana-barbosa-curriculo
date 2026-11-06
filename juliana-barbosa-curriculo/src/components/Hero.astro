@@ -1,0 +1,100 @@
+---
+import { hero, photo } from "../data/content.js";
+import Star from "./stickers/Star.astro";
+import Badge from "./stickers/Badge.astro";
+import Arrow from "./stickers/Arrow.astro";
+
+const longest = hero.rotating.reduce((a, b) => (b.length > a.length ? b : a), "");
+const spoken =
+  hero.rotating.slice(0, -1).join(", ") + " e " + hero.rotating[hero.rotating.length - 1];
+---
+<section class="hero wrap" id="topo" aria-labelledby="hero-name">
+  <div class="hero__text">
+    <h1 id="hero-name" class="hero__name" data-hero="name">
+      <span class="hero__first word">{hero.firstName}</span>
+      <span class="hero__last word">{hero.lastName}</span>
+    </h1>
+
+    <div class="hero__intro" data-hero="intro">
+      <p class="rotator-pill">
+        <Star fill="#FF80B4" class="rotator-pill__star" />
+        <span class="sr-only">{spoken}</span>
+        <span class="rotator" aria-hidden="true" data-words={JSON.stringify(hero.rotating)}>
+          <span class="rotator__sizer">{longest}</span>
+          <span class="rotator__live"><span class="rotator__text">{hero.rotating[0]}</span><span class="rotator__caret"></span></span>
+        </span>
+      </p>
+
+      <hr class="dotted" />
+
+      <p class="hero__subtitle">
+        {hero.subtitle.map((item, i) => (
+          <>
+            {i > 0 && <span class="hero__sep" aria-hidden="true">·</span>}
+            <span>{item}</span>
+          </>
+        ))}
+      </p>
+
+      <p class="hero__tagline">
+        <strong class="hero__main"><span class="marker">{hero.taglineMain}</span></strong>
+        {" "}
+        <span class="hero__rest">{hero.taglineRest}</span>
+      </p>
+
+      <p class="hero__focus">
+        <span class="hero__focus-label">{hero.focusLabel}</span>
+        <em class="hero__focus-value">{hero.focus}</em>
+      </p>
+
+      <a class="btn btn--poppy" href={hero.cta.href}>{hero.cta.label}</a>
+    </div>
+  </div>
+
+  <div class="hero__visual" data-loop>
+    <Arrow class="hero__arrow" data-hero="arrow" />
+
+    <div class="frame" data-hero="photo">
+      <div class="frame__shadow" aria-hidden="true"></div>
+      <div class="frame__clip">
+        {photo.src ? (
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            width="900"
+            height="1125"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            style={`object-position:${photo.position}`}
+          />
+        ) : (
+          <div class="frame__placeholder" aria-hidden="true">
+            <span class="ph__j">j</span>
+            <span class="ph__b">b</span>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <span class="lsticker lsticker--tag hero__label" data-hero="detail">{hero.label}</span>
+    <Badge text={hero.badge} class="hero__badge" data-hero="detail" />
+    <Star fill="#F33283" class="hero__star hero__star--a loop" data-hero="detail" />
+    <Star fill="#FFA9D7" class="hero__star hero__star--b loop" data-hero="detail" />
+  </div>
+</section>
+
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <!-- moldura orgânica (4:5): círculos sobrepostos em 2 colunas -->
+  <clipPath id="scallop" clipPathUnits="objectBoundingBox">
+    <ellipse cx="0.275" cy="0.2" rx="0.2375" ry="0.19" />
+    <ellipse cx="0.725" cy="0.2" rx="0.2375" ry="0.19" />
+    <ellipse cx="0.275" cy="0.44" rx="0.2375" ry="0.19" />
+    <ellipse cx="0.725" cy="0.44" rx="0.2375" ry="0.19" />
+    <ellipse cx="0.275" cy="0.68" rx="0.2375" ry="0.19" />
+    <ellipse cx="0.725" cy="0.68" rx="0.2375" ry="0.19" />
+    <ellipse cx="0.275" cy="0.81" rx="0.2375" ry="0.19" />
+    <ellipse cx="0.725" cy="0.81" rx="0.2375" ry="0.19" />
+    <rect x="0.275" y="0.2" width="0.45" height="0.61" />
+  </clipPath>
+</svg>

@@ -1,0 +1,10 @@
+---
+// estrela de 4 pontas com borda de adesivo (die-cut branco + contorno)
+interface Props { fill?: string; class?: string; [key: string]: any }
+const { fill = "#FFA9D7", class: cls = "", ...rest } = Astro.props;
+const d = "M50 6C53 35 65 47 94 50C65 53 53 65 50 94C47 65 35 53 6 50C35 47 47 35 50 6Z";
+---
+<svg class:list={["sticker", "sticker--star", cls]} viewBox="-8 -8 116 116" aria-hidden="true" focusable="false" {...rest}>
+  <path d={d} fill="#fff" stroke="#fff" stroke-width="15" stroke-linejoin="round" />
+  <path d={d} fill={fill} stroke="#000" stroke-width="3" stroke-linejoin="round" />
+</svg>

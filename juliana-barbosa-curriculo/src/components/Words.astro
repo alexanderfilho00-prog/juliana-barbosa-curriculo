@@ -1,0 +1,8 @@
+---
+// divide um texto em palavras (<span class="w">) para revelação escalonada.
+// os espaços continuam como texto real: seleção e leitura ficam intactas.
+interface Props { text: string; class?: string }
+const { text, class: cls } = Astro.props;
+const words = text.split(" ");
+---
+<span class:list={["words", cls]}>{words.map((w, i) => (<><span class="w">{w}</span>{i < words.length - 1 ? " " : ""}</>))}</span>

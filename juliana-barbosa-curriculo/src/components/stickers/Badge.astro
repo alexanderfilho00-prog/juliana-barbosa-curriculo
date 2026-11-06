@@ -1,0 +1,21 @@
+---
+// selo circular com texto em volta; o anel de texto gira devagar
+interface Props { text: string; class?: string; [key: string]: any }
+const { text, class: cls = "", ...rest } = Astro.props;
+const spark = "M50 6C53 35 65 47 94 50C65 53 53 65 50 94C47 65 35 53 6 50C35 47 47 35 50 6Z";
+---
+<svg class:list={["sticker", "sticker--badge", cls]} viewBox="0 0 200 200" aria-hidden="true" focusable="false" {...rest}>
+  <defs>
+    <path id="badge-ring" d="M100,100 m-67,0 a67,67 0 1,1 134,0 a67,67 0 1,1 -134,0" />
+  </defs>
+  <circle cx="100" cy="100" r="97" fill="#fff" />
+  <circle cx="100" cy="100" r="90" fill="#000" />
+  <g class="badge__spin loop">
+    <text fill="#FFA9D7" font-size="19" font-weight="700" letter-spacing="0.5" style="font-family: var(--sans); font-stretch: 85%;">
+      <textPath href="#badge-ring" textLength="418" lengthAdjust="spacing">{text}</textPath>
+    </text>
+  </g>
+  <g transform="translate(70 70) scale(.6)">
+    <path d={spark} fill="#F33283" stroke="#fff" stroke-width="5" stroke-linejoin="round" />
+  </g>
+</svg>

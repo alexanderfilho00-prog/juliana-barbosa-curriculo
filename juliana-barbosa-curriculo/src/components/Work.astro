@@ -1,0 +1,26 @@
+---
+import { work } from "../data/content.js";
+import Words from "./Words.astro";
+const loop = [...work.marquee, ...work.marquee];
+---
+<section class="work" id="trabalhos" aria-labelledby="work-title">
+  <div class="marquee" aria-hidden="true" data-loop>
+    <div class="marquee__track loop">
+      {[0, 1].map(() => (
+        <span class="marquee__group">
+          {loop.map((w) => (<><span>{w}</span><span class="marquee__star">✦</span></>))}
+        </span>
+      ))}
+    </div>
+  </div>
+  <div class="wrap work__inner">
+    <h2 id="work-title" class="work__title" data-split><Words text={work.title} /></h2>
+    <div class="work__body">
+      <span class="lsticker lsticker--black work__sticker" data-reveal="sticker" aria-hidden="true">brand strategy</span>
+      <p class="work__text" data-reveal="up">{work.text}</p>
+      <a class="btn btn--black" href={work.link.href} target="_blank" rel="noopener noreferrer" data-reveal="up">
+        {work.link.label}<span class="sr-only"> (abre em nova aba)</span>
+      </a>
+    </div>
+  </div>
+</section>

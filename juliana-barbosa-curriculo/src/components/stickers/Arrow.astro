@@ -1,0 +1,9 @@
+---
+// seta desenhada à mão com laço (traço animado via stroke-dashoffset)
+interface Props { class?: string; [key: string]: any }
+const { class: cls = "", ...rest } = Astro.props;
+---
+<svg class:list={["hand-arrow", cls]} viewBox="0 0 260 170" fill="none" aria-hidden="true" focusable="false" {...rest}>
+  <path class="hand-arrow__line" pathLength="1" d="M8 34C70 20 150 30 158 92C164 140 104 152 98 118C92 84 160 74 238 102" stroke="#000" stroke-width="3" stroke-linecap="round" />
+  <path class="hand-arrow__head" d="M220 84L240 103L214 112" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

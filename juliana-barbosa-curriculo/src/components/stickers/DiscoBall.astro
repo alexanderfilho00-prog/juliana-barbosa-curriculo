@@ -1,0 +1,33 @@
+---
+// globo espelhado vetorial — ladrilhos calculados por latitude/longitude
+interface Props { class?: string; [key: string]: any }
+const { class: cls = "", ...rest } = Astro.props;
+const cx = 70, cy = 76, R = 52, lats = 8, lons = 8;
+const rad = (d: number) => (d * Math.PI) / 180;
+const pt = (lat: number, lon: number) =>
+  `${(cx + R * Math.cos(rad(lat)) * Math.sin(rad(lon))).toFixed(2)},${(cy + R * Math.sin(rad(lat))).toFixed(2)}`;
+const palette = ["#F33283", "#FFA9D7", "#FFD54A", "#FF80B4", "#F33283", "#FFD54A"];
+const tiles: { points: string; fill: string }[] = [];
+for (let i = 0; i < lats; i++) {
+  const a0 = -90 + (180 * i) / lats, a1 = -90 + (180 * (i + 1)) / lats;
+  for (let j = 0; j < lons; j++) {
+    const l0 = -90 + (180 * j) / lons, l1 = -90 + (180 * (j + 1)) / lons;
+    const fill = (i + j) % 2 === 0 ? "#FFFFFF" : palette[(i * 2 + j) % palette.length];
+    tiles.push({ points: [pt(a0, l0), pt(a0, l1), pt(a1, l1), pt(a1, l0)].join(" "), fill });
+  }
+}
+const spark = "M50 6C53 35 65 47 94 50C65 53 53 65 50 94C47 65 35 53 6 50C35 47 47 35 50 6Z";
+---
+<svg class:list={["sticker", "sticker--disco", cls]} viewBox="0 0 150 140" aria-hidden="true" focusable="false" {...rest}>
+  <circle cx={cx} cy={cy} r={R + 9} fill="#fff" />
+  <g transform="translate(108 2) scale(.34)">
+    <path d={spark} fill="#fff" stroke="#fff" stroke-width="22" stroke-linejoin="round" />
+    <path d={spark} fill="#FFD54A" stroke="#000" stroke-width="6" stroke-linejoin="round" />
+  </g>
+  <g transform="translate(124 34) scale(.2)">
+    <path d={spark} fill="#fff" stroke="#fff" stroke-width="30" stroke-linejoin="round" />
+    <path d={spark} fill="#FF80B4" stroke="#000" stroke-width="9" stroke-linejoin="round" />
+  </g>
+  {tiles.map((t) => <polygon points={t.points} fill={t.fill} stroke="#000" stroke-width="1.2" stroke-linejoin="round" />)}
+  <circle cx={cx} cy={cy} r={R} fill="none" stroke="#000" stroke-width="3" />
+</svg>

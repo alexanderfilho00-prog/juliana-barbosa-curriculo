@@ -1,0 +1,29 @@
+---
+import { why } from "../data/content.js";
+import Words from "./Words.astro";
+import Star from "./stickers/Star.astro";
+const titleWords = why.title.split(" ");
+const sansPart = titleWords.slice(0, -2).join(" ");
+const serifPart = titleWords.slice(-2).join(" ");
+---
+<section class="why" id="por-que-eu" aria-labelledby="why-title">
+  <div class="wrap why__grid">
+    <div class="why__head">
+      <p class="kicker" data-reveal="up">por que eu</p>
+      <h2 id="why-title" class="why__title" data-split>
+        <Words text={sansPart} /> <span class="serif"><Words text={serifPart} /></span>
+        <Star fill="#F33283" class="why__star" data-reveal="sticker" />
+      </h2>
+    </div>
+    <ol class="why__list">
+      {why.items.map((item, i) => (
+        <li class="why__item" data-reveal="why">
+          <span class="why__rule" aria-hidden="true"></span>
+          <span class="why__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

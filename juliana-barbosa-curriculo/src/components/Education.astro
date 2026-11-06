@@ -1,0 +1,28 @@
+---
+import { education } from "../data/content.js";
+import Words from "./Words.astro";
+const [a, b, c] = education.title.split(" ");
+---
+<section class="edu" id="estudos" aria-labelledby="edu-title">
+  <div class="wrap edu__grid">
+    <div class="edu__left">
+      <h2 id="edu-title" class="edu__title" data-split>
+        <Words text={`${a} ${b}`} /> <span class="serif"><Words text={c} /></span>
+      </h2>
+      <div class="edu__degree" data-reveal="degree">
+        <p class="edu__kicker">graduação</p>
+        <p class="edu__course">{education.degree.course}</p>
+        <p class="edu__meta">{education.degree.school} · {education.degree.dates}</p>
+      </div>
+    </div>
+    <ul class="courses" data-reveal="courses" aria-label="cursos">
+      {education.courses.map((c) => (
+        <li>
+          <span class="courses__name">{c.name}</span>
+          {c.school && <span class="courses__school">{c.school}</span>}
+          <span class="courses__date">{c.dates}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

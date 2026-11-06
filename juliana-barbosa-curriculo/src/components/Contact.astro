@@ -1,0 +1,39 @@
+---
+import { closing, contact, links, hero } from "../data/content.js";
+import Star from "./stickers/Star.astro";
+
+// só aparecem os contatos preenchidos em content.js
+const items = [
+  contact.email && { label: "e-mail", value: contact.email, href: `mailto:${contact.email}` },
+  contact.linkedin && { label: "linkedin", value: contact.linkedin.replace(/^https?:\/\/(www\.)?/, ""), href: contact.linkedin, external: true },
+  contact.instagram && { label: "instagram", value: contact.instagram.replace(/^https?:\/\/(www\.)?/, ""), href: contact.instagram, external: true },
+  contact.phone && { label: "telefone", value: contact.phone, href: `tel:${contact.phone.replace(/[^\d+]/g, "")}` },
+].filter(Boolean);
+---
+<section class="contact" id="contato" aria-labelledby="contact-title">
+  <div class="wrap contact__inner" data-loop>
+    <Star fill="#FFFFFF" class="contact__star contact__star--a loop" data-reveal="sticker" />
+    <Star fill="#FFA9D7" class="contact__star contact__star--b loop" data-reveal="sticker" />
+    <h2 id="contact-title" class="contact__title" data-reveal="big">
+      <span class="contact__w">{closing.title[0]}</span>
+      <span class="contact__w serif">{closing.title[1]}</span>
+    </h2>
+    {items.length > 0 && (
+      <ul class="contact__list">
+        {items.map((it) => (
+          <li>
+            <span class="contact__label">{it.label}</span>
+            <a href={it.href} {...(it.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{it.value}</a>
+          </li>
+        ))}
+      </ul>
+    )}
+    <a class="btn btn--black btn--lg" href={links.portfolio} target="_blank" rel="noopener noreferrer" data-reveal="up">
+      abrir portfólio ↗<span class="sr-only"> (abre em nova aba)</span>
+    </a>
+  </div>
+  <footer class="footer wrap">
+    <p>{hero.firstName} {hero.lastName} · {hero.subtitle[2]}</p>
+    <p>{closing.footer}</p>
+  </footer>
+</section>

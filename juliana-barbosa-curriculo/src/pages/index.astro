@@ -1,0 +1,60 @@
+---
+import "@fontsource-variable/bricolage-grotesque/standard.css";
+import "@fontsource-variable/fraunces/soft-italic.css";
+import "../styles/global.css";
+import sansUrl from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-standard-normal.woff2?url";
+import serifUrl from "@fontsource-variable/fraunces/files/fraunces-latin-soft-italic.woff2?url";
+
+import { site } from "../data/content.js";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Work from "../components/Work.astro";
+import Repertoire from "../components/Repertoire.astro";
+import Why from "../components/Why.astro";
+import Experience from "../components/Experience.astro";
+import Education from "../components/Education.astro";
+import Contact from "../components/Contact.astro";
+---
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{site.title}</title>
+    <meta name="description" content={site.description} />
+    <meta name="theme-color" content="#F33283" />
+    <meta property="og:title" content={site.title} />
+    <meta property="og:description" content={site.description} />
+    <meta property="og:type" content="profile" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={sansUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={serifUrl} as="font" type="font/woff2" crossorigin />
+    <script is:inline>
+      // estados iniciais das animações só existem com JS + movimento permitido.
+      // se o script de animação não carregar em 3s, tudo aparece sem animação.
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          d.classList.add("motion-ok");
+          setTimeout(function () { if (!window.__jbMotion) d.classList.remove("motion-ok"); }, 3000);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <Header />
+    <main id="conteudo">
+      <Hero />
+      <Work />
+      <Repertoire />
+      <Why />
+      <Experience />
+      <Education />
+      <Contact />
+    </main>
+    <script>
+      import "../scripts/motion.js";
+    </script>
+  </body>
+</html>

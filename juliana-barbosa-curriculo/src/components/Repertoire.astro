@@ -1,0 +1,29 @@
+---
+import { repertoire } from "../data/content.js";
+import Words from "./Words.astro";
+import Coffee from "./stickers/Coffee.astro";
+---
+<section class="rep" id="repertorio" aria-labelledby="rep-title">
+  <div class="wrap">
+    <p class="kicker" data-reveal="up">repertório</p>
+    <h2 id="rep-title" class="rep__title" data-split>
+      {repertoire.title.map((line) => (
+        <span class={`rep__t rep__t--${line.style}`}><Words text={line.text} /></span>
+      ))}
+    </h2>
+    <div class="rep__grid">
+      <div class="rep__text">
+        {repertoire.paragraphs.map((p) => <p data-reveal="up" set:html={p} />)}
+      </div>
+      <aside class="rep__aside" aria-label="competências">
+        <ul class="tags" data-reveal="tags">
+          {repertoire.tags.map((t) => <li class="tag">{t}</li>)}
+        </ul>
+        <div class="rep__stickers" data-loop>
+          <span class="lsticker lsticker--tag rep__ia" data-reveal="sticker" aria-hidden="true">IA na prática</span>
+          <Coffee class="rep__coffee loop" data-reveal="sticker" />
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
