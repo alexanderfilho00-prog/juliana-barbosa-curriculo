@@ -1,0 +1,33 @@
+---
+import { education, art } from "../data/content.js";
+import Chars from "./Chars.astro";
+import Obj from "./Obj.astro";
+const [a, b, c] = education.title.split(" ");
+---
+<section class="edu" id="estudos" aria-labelledby="edu-title">
+  <div class="wrap edu__grid">
+    <div class="edu__left">
+      <h2 id="edu-title" class="edu__title" aria-label={education.title}>
+        <span data-split><Chars text={`${a} ${b}`} /></span>
+        <span class="serif" data-follow>{c}</span>
+      </h2>
+      <div class="edu__card-wrap">
+        <div class="edu__degree">
+          <p class="edu__kicker">graduação</p>
+          <p class="edu__course">{education.degree.course}</p>
+          <p class="edu__meta">{education.degree.school} · {education.degree.dates}</p>
+        </div>
+        <Obj src={art.laco} class="edu__laco" data-sticker />
+      </div>
+    </div>
+    <ul class="courses" aria-label="cursos">
+      {education.courses.map((c) => (
+        <li>
+          <span class="courses__name">{c.name}</span>
+          {c.school && <span class="courses__school">{c.school}</span>}
+          <span class="courses__date">{c.dates}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

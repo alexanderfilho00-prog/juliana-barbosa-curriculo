@@ -1,0 +1,30 @@
+---
+import { repertoire, art } from "../data/content.js";
+import Chars from "./Chars.astro";
+import Obj from "./Obj.astro";
+const [l1, l2, l3] = repertoire.title;
+const label = repertoire.title.map((l) => l.text).join(" ");
+---
+<section class="rep" id="repertorio" aria-labelledby="rep-title">
+  <div class="wrap">
+    <h2 id="rep-title" class="rep__title" aria-label={label}>
+      <span class="rep__t rep__t--sans" data-split><Chars text={l1.text} /></span>
+      <span class="rep__t rep__t--serif" data-follow>{l2.text}</span>
+      <span class="rep__t rep__t--small" data-follow>{l3.text}</span>
+    </h2>
+    <div class="rep__grid">
+      <div class="rep__text">
+        {repertoire.paragraphs.map((p) => <p set:html={p} />)}
+      </div>
+      <aside class="rep__aside" aria-label="competências">
+        <ul class="tags">
+          {repertoire.tags.map((t) => <li class="tag">{t}</li>)}
+        </ul>
+        <div class="rep__stickers">
+          <span class="lsticker lsticker--tag rep__ia" data-sticker aria-hidden="true">IA na prática</span>
+          <Obj src={art.calendario} class="rep__cal" data-sticker />
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

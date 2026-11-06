@@ -1,0 +1,31 @@
+---
+import { work, art } from "../data/content.js";
+import Chars from "./Chars.astro";
+import Obj from "./Obj.astro";
+const row = [...work.marquee, ...work.marquee, ...work.marquee];
+---
+<section class="work" id="trabalhos" aria-labelledby="work-title">
+  <div class="marquees" aria-hidden="true">
+    <div class="marquee marquee--a" data-marquee="-1">
+      <div class="marquee__track">
+        {[0, 1].map(() => (<span class="marquee__group">{row.map((w) => (<><span>{w}</span><span class="marquee__star">✦</span></>))}</span>))}
+      </div>
+    </div>
+    <div class="marquee marquee--b" data-marquee="1">
+      <div class="marquee__track">
+        {[0, 1].map(() => (<span class="marquee__group">{row.map((w) => (<><span>{w}</span><span class="marquee__star">✦</span></>))}</span>))}
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap work__inner">
+    <h2 id="work-title" class="work__title" data-split aria-label={work.title}><Chars text={work.title} /></h2>
+    <div class="work__body">
+      <p class="work__text">{work.text}</p>
+      <a class="btn btn--paper" href={work.link.href} target="_blank" rel="noopener noreferrer">
+        {work.link.label}<span class="sr-only"> (abre em nova aba)</span>
+      </a>
+    </div>
+    <Obj src={art.cafe} class="work__cafe" data-sticker />
+  </div>
+</section>
