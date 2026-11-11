@@ -1,0 +1,8 @@
+---
+// divide o texto em palavras (.cw, não quebram) e letras (.c) para tipografia cinética.
+// o título que usa este componente recebe aria-label com o texto inteiro.
+interface Props { text: string; class?: string }
+const { text, class: cls } = Astro.props;
+const words = text.split(" ");
+---
+<span class:list={["chars", cls]}>{words.map((w, i) => (<><span class="cw">{[...w].map((ch) => <span class="c">{ch}</span>)}</span>{i < words.length - 1 ? " " : ""}</>))}</span>

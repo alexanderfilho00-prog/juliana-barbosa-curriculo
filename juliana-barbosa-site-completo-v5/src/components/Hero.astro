@@ -1,0 +1,66 @@
+---
+import { hero, photo, art } from "../data/content.js";
+import Badge from "./stickers/Badge.astro";
+import Arrow from "./stickers/Arrow.astro";
+
+const longest = hero.rotating.reduce((a, b) => (b.length > a.length ? b : a), "");
+const spoken = hero.rotating.slice(0, -1).join(", ") + " e " + hero.rotating[hero.rotating.length - 1];
+---
+<section class="hero wrap" id="topo" aria-labelledby="hero-name">
+  <div class="hero__text">
+    <!-- pílulas ligadas por pontilhado, como na referência tipográfica -->
+    <p class="pills" data-hero="pills">
+      {hero.subtitle.map((item, i) => (
+        <>
+          {i > 0 && <span class="pills__dots" aria-hidden="true"></span>}
+          <span class="pill">{item}</span>
+        </>
+      ))}
+    </p>
+
+    <h1 id="hero-name" class="hero__name">
+      <span class="hero__first script" data-hero="first">{hero.firstName}</span>
+      <span class="hero__last caps" data-hero="last">{hero.lastName}</span>
+    </h1>
+
+    <p class="rotator-line" data-hero="intro">
+      <img class="rotator-line__star" src={art.brilho} alt="" width="591" height="640" />
+      <span class="sr-only">{spoken}</span>
+      <span class="rotator caps" aria-hidden="true" data-words={JSON.stringify(hero.rotating)}>
+        <span class="rotator__sizer">{longest}</span>
+        <span class="rotator__live"><span class="rotator__text">{hero.rotating[0]}</span><span class="rotator__caret"></span></span>
+      </span>
+    </p>
+
+    <hr class="dashed" data-hero="rule" />
+
+    <div class="hero__intro" data-hero="intro">
+      <p class="hero__tagline">
+        <strong class="hero__main">{hero.taglineMain}</strong>
+        {" "}
+        <span class="hero__rest">{hero.taglineRest}</span>
+      </p>
+      <p class="hero__focus">
+        <span class="pill pill--solid">{hero.focusLabel}</span>
+        <em class="hero__focus-value caps">{hero.focus}</em>
+      </p>
+      <a class="btn" href={hero.cta.href}>{hero.cta.label}</a>
+    </div>
+  </div>
+
+  <div class="hero__visual">
+    <Arrow class="hero__arrow" />
+    <figure class="card" data-hero="photo">
+      {photo.src ? (
+        <>
+          <img class="card__img" src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} loading="eager" fetchpriority="high" decoding="async" />
+          <span class="card__flash" aria-hidden="true" style={`--card:url(${photo.src})`}></span>
+        </>
+      ) : (
+        <div class="card__placeholder" aria-hidden="true"><span class="script">jb</span></div>
+      )}
+    </figure>
+    <span class="lsticker lsticker--tag hero__label" data-hero="detail">{hero.label}</span>
+    <Badge text={hero.badge} class="hero__badge" data-hero="detail" />
+  </div>
+</section>

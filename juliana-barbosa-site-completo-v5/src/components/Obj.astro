@@ -1,0 +1,9 @@
+---
+// sticker 3D: imagem com borda branca de adesivo recortado.
+// rotação ociosa e entrada ficam no GSAP; hover em CSS.
+interface Props { src: string; class?: string; eager?: boolean; [key: string]: any }
+const { src, class: cls = "", eager = false, ...rest } = Astro.props;
+---
+<span class:list={["obj", cls]} aria-hidden="true" {...rest}>
+  <img class="obj__img" src={src} alt="" width="640" height="640" loading={eager ? "eager" : "lazy"} decoding="async" draggable="false" />
+</span>

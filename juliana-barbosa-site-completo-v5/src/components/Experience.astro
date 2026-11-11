@@ -1,0 +1,31 @@
+---
+import { experience } from "../data/content.js";
+const words = experience.title.split(" ");
+---
+<section class="xp-sec" id="trajetoria" aria-labelledby="xp-title">
+  <div class="wrap">
+    <div class="xp-head">
+      <div class="xp-head__text">
+        <h2 id="xp-title" class="xp-title" aria-label={experience.title}>
+          <span class="script" data-write>{words.slice(0, -1).join(" ")}</span>
+          <span class="caps" data-follow>{words[words.length - 1]}</span>
+        </h2>
+      </div>
+    </div>
+    <ol class="xp">
+      {experience.items.map((item) => (
+        <li class:list={["xp__item", { "xp__item--current": item.current }]}>
+          <p class="xp__dates">
+            {item.current && <span class="xp__dot" aria-hidden="true"></span>}
+            <span>{item.dates}</span>
+          </p>
+          <div class="xp__head">
+            <h3 class="xp__role">{item.role}</h3>
+            {item.company && <p class="xp__company">{item.company}</p>}
+          </div>
+          <p class="xp__text">{item.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

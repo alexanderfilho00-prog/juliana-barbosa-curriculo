@@ -1,0 +1,23 @@
+---
+import { repertoire } from "../data/content.js";
+const [l1, l2] = repertoire.title;
+const label = repertoire.title.map((l) => l.text).join(" ");
+---
+<section class="rep" id="repertorio" aria-labelledby="rep-title">
+  <div class="wrap">
+    <h2 id="rep-title" class="rep__title" aria-label={label}>
+      <span class="rep__t script" data-write>{l1.text}</span>
+      <span class="rep__t caps" data-follow>{l2.text}</span>
+    </h2>
+    <div class="rep__grid">
+      <div class="rep__text">
+        {repertoire.paragraphs.map((p) => <p set:html={p} />)}
+      </div>
+      <aside class="rep__aside" aria-label="competências">
+        <ul class="tags">
+          {repertoire.tags.map((t) => <li class="tag">{t}</li>)}
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>

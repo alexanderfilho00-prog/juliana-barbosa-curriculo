@@ -1,0 +1,20 @@
+---
+import { nav, hero } from "../data/content.js";
+---
+<a class="skip-link" href="#conteudo">pular para o conteúdo</a>
+<header class="header">
+  <div class="wrap header__inner">
+    <a class="logo" href="#topo" aria-label={`${hero.firstName} ${hero.lastName}, voltar ao início`}>
+      <span class="logo__full" aria-hidden="true">{hero.firstName.toLowerCase()} <em>{hero.lastName.toLowerCase()}</em></span>
+      <span class="logo__short" aria-hidden="true">j<em>b</em></span>
+    </a>
+    <nav class="nav" aria-label="seções da página">
+      <ul>
+        {nav.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+  <span class="progress" aria-hidden="true"></span>
+</header>

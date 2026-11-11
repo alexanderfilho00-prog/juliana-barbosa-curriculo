@@ -1,0 +1,27 @@
+---
+import { why, art } from "../data/content.js";
+import Obj from "./Obj.astro";
+import Win from "./Win.astro";
+const words = why.title.split(" ");
+const sansPart = words.slice(0, -2).join(" ");
+const accentPart = words.slice(-2).join(" ");
+---
+<section class="why" id="por-que-eu" aria-labelledby="why-title">
+  <div class="wrap">
+    <div class="why__head">
+      <h2 id="why-title" class="why__title" aria-label={why.title}>
+        <span class="script" data-write>{sansPart}</span>
+        <span class="caps" data-follow>{accentPart}</span>
+      </h2>
+      <Obj src={art.brilho} class="why__brilho" data-sticker />
+    </div>
+    <ol class="why__list">
+      {why.items.map((item) => (
+        <Win tag="li" class="why__item">
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </Win>
+      ))}
+    </ol>
+  </div>
+</section>

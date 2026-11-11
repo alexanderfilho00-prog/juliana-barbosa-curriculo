@@ -1,0 +1,16 @@
+---
+import { work } from "../data/content.js";
+const row = [...work.marquee, ...work.marquee, ...work.marquee];
+---
+<div class="marquees" id="trabalhos" aria-hidden="true">
+  <div class="marquee marquee--a" data-marquee="-1">
+    <div class="marquee__track">
+      {[0, 1].map(() => (<span class="marquee__group">{row.map((w) => (<><span>{w}</span><span class="marquee__star">★</span></>))}</span>))}
+    </div>
+  </div>
+  <div class="marquee marquee--b" data-marquee="1">
+    <div class="marquee__track">
+      {[0, 1].map(() => (<span class="marquee__group">{row.map((w) => (<><span>{w}</span><span class="marquee__star">✦</span></>))}</span>))}
+    </div>
+  </div>
+</div>

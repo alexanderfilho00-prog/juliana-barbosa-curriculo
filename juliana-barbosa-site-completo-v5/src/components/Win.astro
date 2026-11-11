@@ -1,0 +1,14 @@
+---
+// janela de sistema estilo Y2K (moodboard): barra de título com ícones.
+// os ícones são decorativos; o conteúdo fica no slot.
+interface Props { class?: string; tag?: string; [key: string]: any }
+const { class: cls = "", tag = "div", ...rest } = Astro.props;
+const Tag = tag;
+---
+<Tag class:list={["win", cls]} {...rest}>
+  <span class="win__bar" aria-hidden="true">
+    <span class="win__icons">☆ ♡ ⌕</span>
+    <span class="win__ctrl">— □ ×</span>
+  </span>
+  <div class="win__body"><slot /></div>
+</Tag>
